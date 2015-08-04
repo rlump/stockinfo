@@ -55,4 +55,5 @@ Rails.application.routes.draw do
   #   end
 
   get 'stocks' => 'stocks#index'
+  get 'price_history' => 'stocks#price_history'
 end
