@@ -19,8 +19,9 @@ class StocksController < ApplicationController
   def price_history
 
     if (params[:symbol])
-      @price_hist = YahooFinance.historical_quotes(params[:symbol], { start_date: Time::now-(24*60*60*30), end_date: Time::now })
-      @price_hist = @price_hist.collect {|x| OpenStruct.new(x).marshal_dump }
+      @price_hist = YahooFinance.historical_quotes(params[:symbol], \
+        { start_date: Time::now-(24*60*60*30), end_date: Time::now }). \
+        collect {|x| OpenStruct.new(x).marshal_dump }
     end
 
     respond_to do |format|
@@ -33,9 +34,10 @@ class StocksController < ApplicationController
   def price_history_avg
 
     if (params[:symbol])
-      @price_hist = YahooFinance.historical_quotes(params[:symbol], { start_date: Time::now-(24*60*60*30), end_date: Time::now })
-      @price_hist = @price_hist.collect {|x| OpenStruct.new(x).marshal_dump }
-      @price_avg = @price_hist.map {|x| (x[:high].to_f+x[:low].to_f+x[:open].to_f+x[:close].to_f)/4 }
+      @price_avg = YahooFinance.historical_quotes(params[:symbol], \
+        { start_date: Time::now-(24*60*60*30), end_date: Time::now }). \
+        collect {|x| OpenStruct.new(x).marshal_dump }. \
+        map {|x| (x[:high].to_f+x[:low].to_f+x[:open].to_f+x[:close].to_f)/4 }
     end
 
     respond_to do |format|
