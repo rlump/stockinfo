@@ -37,7 +37,6 @@ stock_info_csv_files.each do |file|
         next if col == nil
         rowentry[col] = row[index]
       }
-      puts "#{rowentry}"
       stock = Stock.where("symbol = ?", rowentry["symbol"]).take
       if stock
         stock.update(rowentry)
