@@ -5,7 +5,7 @@ class StocksController < ApplicationController
   def index
 
     if (params[:name])
-      @stocks = Stock.where('name LIKE ?', "#{params[:name]}%")
+      @stocks = Stock.where('name LIKE ?', "#{params[:name]}%").order(name: :asc)
     else
       @stocks = Stock.all
     end
