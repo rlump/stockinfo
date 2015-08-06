@@ -45,20 +45,4 @@ class StocksController < ApplicationController
 
   end
 
-  def price_history_avg
-
-    if (params[:symbol])
-      @price_avg = YahooFinance.historical_quotes(params[:symbol], \
-        { start_date: Time::now-(24*60*60*30), end_date: Time::now }). \
-        collect {|x| OpenStruct.new(x).marshal_dump }. \
-        map {|x| (x[:high].to_f+x[:low].to_f+x[:open].to_f+x[:close].to_f)/4 }
-    end
-
-    respond_to do |format|
-      format.html # stock_history.html.erb
-      format.json { render json: @price_avg }
-    end
-
-  end
-
 end
