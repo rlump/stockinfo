@@ -7,11 +7,11 @@
  1. $> rake db:migrate
  2. $> rake db:seed
 
-Then run it (eg. rails -s )
+Then run it (eg. rails s )
 
 ### Routes supported with json output
   1. /stocks?[name=aaa..] - gets all listed companies by name and symbol
      or a subset of those with names beginning with the case insensitive optional
      name argument
-  2. /prices?symbol=XXX - gets thirty price day history for symbol XXX array containing
-     high, low, open, and close
+  2. /prices?symbol=XXX - gets thirty price day history for symbol XXX as array 
+     containing high, low, open, and close and the trade_date
